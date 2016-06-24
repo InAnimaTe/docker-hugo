@@ -13,7 +13,7 @@ ENV HUGO_ARCHIVE hugo_${HUGO_VERSION}_linux-64bit.tgz
 ENV HUGO_BINARY hugo
 
 ADD https://github.com/spf13/hugo/releases/download/v${HUGO_VERSION}/${HUGO_ARCHIVE} ${WORK_DIR}
-RUN tar xzf ${WORK_DIR}/${HUGO_ARCHIVE} \
+RUN tar xzf ${WORK_DIR}/${HUGO_ARCHIVE} -C ${WORK_DIR} \
 	&& ln -s ${WORK_DIR}/${HUGO_BINARY} /usr/local/bin/hugo
 
 # Create working directory
