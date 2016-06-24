@@ -7,14 +7,14 @@ RUN apt-get -qq update \
 	&& rm -rf /var/lib/apt/lists/*
 
 # Download and install hugo
+ENV WORK_DIR /opt
 ENV HUGO_VERSION 0.16
 ENV HUGO_ARCHIVE hugo_${HUGO_VERSION}_linux-64bit.tgz
 ENV HUGO_BINARY hugo
 
-ADD https://github.com/spf13/hugo/releases/download/v${HUGO_VERSION}/${HUGO_ARCHIVE} /usr/local/
-RUN tar xzf /usr/local/${HUGO_ARCHIVE} -C /usr/local/ \
-	&& ln -s /usr/local/${HUGO_BINARY}/${HUGO_BINARY} /usr/local/bin/hugo \
-	&& rm /usr/local/${HUGO_ARCHIVE}
+ADD https://github.com/spf13/hugo/releases/download/v${HUGO_VERSION}/${HUGO_ARCHIVE} ${WORK_DIR}
+RUN tar xzf ${WORK_DIR}/${HUGO_ARCHIVE} \
+	&& ln -s ${WORK_DIR}/${HUGO_BINARY} /usr/local/bin/hugo
 
 # Create working directory
 RUN mkdir /usr/share/blog
