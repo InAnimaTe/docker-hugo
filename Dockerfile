@@ -1,10 +1,15 @@
-FROM debian:wheezy
-MAINTAINER yigal@publysher.nl
+#FROM debian:wheezy
+
+FROM node:6.3
+
+# Install necessary node packages for minification
+COPY package.json ./package.json
+RUN npm install
 
 # Install pygments (for syntax highlighting) 
 RUN apt-get -qq update \
-	&& DEBIAN_FRONTEND=noninteractive apt-get -qq install -y --no-install-recommends python-pygments \
-	&& rm -rf /var/lib/apt/lists/*
+    && DEBIAN_FRONTEND=noninteractive apt-get -qq install -y --no-install-recommends python-pygments \
+    && rm -rf /var/lib/apt/lists/*
 
 # Download and install hugo
 ENV WORK_DIR /opt
@@ -14,7 +19,7 @@ ENV HUGO_BINARY hugo
 
 ADD https://github.com/spf13/hugo/releases/download/v${HUGO_VERSION}/${HUGO_ARCHIVE} ${WORK_DIR}
 RUN tar xzf ${WORK_DIR}/${HUGO_ARCHIVE} -C ${WORK_DIR} \
-	&& ln -s ${WORK_DIR}/${HUGO_BINARY} /usr/local/bin/hugo
+    && ln -s ${WORK_DIR}/${HUGO_BINARY} /usr/local/bin/hugo
 
 # Create working directory
 RUN mkdir /usr/share/blog
