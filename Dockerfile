@@ -4,7 +4,7 @@ FROM node:6.3
 
 # Install necessary node packages for minification
 COPY package.json ./package.json
-RUN npm install
+RUN npm install --global
 
 # Install pygments (for syntax highlighting) 
 RUN apt-get -qq update \

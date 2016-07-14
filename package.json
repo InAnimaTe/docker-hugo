@@ -1,6 +1,5 @@
 {
   "private": true,
-  "preferGlobal": true,
   "scripts": {
     "build": "gulp build"
   },
