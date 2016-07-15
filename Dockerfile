@@ -1,6 +1,13 @@
 #FROM debian:wheezy
 
 FROM node:6.3
+ENV NODE_DIR /opt/node
+RUN mkdir ${NODE_DIR}
+WORKDIR ${NODE_DIR}
+COPY package.json ./package.json
+RUN npm install
+RUN echo "export PATH=$PATH:${NODE_DIR}/node_modules/.bin" >> /root/.bashrc
+
 
 # Install pygments (for syntax highlighting) 
 RUN apt-get -qq update \
@@ -8,7 +15,8 @@ RUN apt-get -qq update \
     && rm -rf /var/lib/apt/lists/*
 
 # Download and install hugo
-ENV WORK_DIR /opt
+RUN mkdir /opt/hugo
+ENV WORK_DIR /opt/hugo
 ENV HUGO_VERSION 0.16
 ENV HUGO_ARCHIVE hugo_${HUGO_VERSION}_linux-64bit.tgz
 ENV HUGO_BINARY hugo
