@@ -1,3 +1,27 @@
+
+## Docker-Hugo
+
+The goal of this docker image is to provide a build environment for Hugo sites.
+My company, [Arroyo Networks](https://arroyonetworks.com/) uses it with Gitlab
+CI to test and build our static web properties.
+We also include NPM and necessary projects to enable minification and other
+features that happen at build time.
+
+A few notes here. Let's say you're using CI, you can have the following commands
+run to build your site:
+
+* `mv /opt/node/node_modules .`
+* `npm run build`
+
+However, you can also still utilize this image as documented below from the
+original repo owners' own readme i.e. as standalone server or volume image for
+your own web server (see ENTRYPOINT/CMD in Dockerfile)
+
+> As you can see, I include my own optimized package.json and instruct you to
+> move your node_modules directory over. This is the best way to ensure node
+> will work with your resulting mounted in project files during CI time.
+
+-------------------------------------------------------------------------
 publysher/hugo
 ==============
 
