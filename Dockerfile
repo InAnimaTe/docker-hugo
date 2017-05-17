@@ -17,8 +17,8 @@ RUN apt-get -qq update \
 # Download and install hugo
 RUN mkdir /opt/hugo
 ENV WORK_DIR /opt/hugo
-ENV HUGO_VERSION 0.16
-ENV HUGO_ARCHIVE hugo_${HUGO_VERSION}_linux-64bit.tgz
+ENV HUGO_VERSION 0.20.7
+ENV HUGO_ARCHIVE hugo_${HUGO_VERSION}_Linux-64bit.tar.gz
 ENV HUGO_BINARY hugo
 
 ADD https://github.com/spf13/hugo/releases/download/v${HUGO_VERSION}/${HUGO_ARCHIVE} ${WORK_DIR}
